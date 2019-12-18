@@ -8,79 +8,77 @@
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 {% endblock %}
 {% block content %}
-	<div class="container">
-	 <!-- head -->
-     <div class="header_box1">
-    <div class="header_box2">
-         <a class="logo_box" href="{% url 'crowdfund:index' %}"><img src="{% static 'images/7.jpg' %}"/></a>
-         <div class="nam">
-            <h1>众筹之光</h1>
-            <p>www.zhongchouzhiguang.com</p>
+<div class="container">
+
+    <!-- head -->
+    <div class="header_box1">
+        <div class="header_box2">
+            <a class="logo_box" href="{% url 'crowdfund:index' %}"><img src="{% static 'images/7.jpg' %}"/></a>
+            <div class="nam">
+                <h1>众筹之光</h1>
+                <p>www.zhongchouzhiguang.com</p>
+            </div>
+        </div>
+
+        <!-- menu -->
+        <div class="menu">
+            <span><a href="{% url 'crowdfund:thefirst' %}">首页</a></span>
+            <span><a href="{% url 'crowdfund:filter' %}">优质项目</a></span>
+            <span><a href="{% url 'crowdfund:add' %}">发起众筹</a></span>
+            <span><a href="{% url 'crowdfund:guide' %}">新手指南</a></span>
+            <span><a href="{% url 'crowdfund:myself' %}">个人中心</a></span>
+            <span style="position: relative; margin-left:40px;">
+                <form method="get" action="/search/">
+                    {% csrf_token %}
+                    <input type="search" placeholder="搜索" required>
+                    <button type="submit">搜索</button>
+                </form>
+            </span>
+            <!-- 登录注册按钮 -->
+            <div class="btns" style="margin-left: 800px;margin-top:-20px;">
+                <a href="{% url 'crowdfund:login' %}"><button class="white small" style="">登录</button></a>
+                <a href="{% url 'crowdfund:register' %}"><button class="blue small ml20 mr20">注册</button></a>
+            </div>
+        </div>
+        <!-- munu end -->
+
+        <!-- 登录注册按钮 -->
+        <div class="btns">
+            <a href="{% url 'crowdfund:login' %}"><button class="white small" >登录</button></a>
+            <a href="{% url 'crowdfund:register' %}"><button class="blue small ml20 mr20">注册</button></a>
         </div>
     </div>
-    <!-- menu -->
-    <div class="menu">
-        <span><a href="{% url 'crowdfund:thefirst' %}">首页</a></span>
-        <span><a href="{% url 'crowdfund:search' %}">优质项目</a></span>
-        <span><a href="{% url 'crowdfund:add' %}">发起众筹</a></span>
-        <span><a href="{% url 'crowdfund:guide' %}">新手指南</a></span>
-        <span><a href="{% url 'crowdfund:myself' %}">个人中心</a></span>
-        <span style="position: relative; margin-left:40px;">
-        <form method="get" action="/search/">
-            {% csrf_token %}
-            <input type="search" placeholder="搜索" required>
-            <button type="submit">搜索</button>
-        </form>
-        </span> 
-        <!-- 登录注册按钮 -->
-    <div class="btns" style="margin-left: 800px;margin-top:-20px;">
-
-       <a href="{% url 'crowdfund:login' %}"><button class="white small" style="">登录</button></a>
-
-        <a href="{% url 'crowdfund:register' %}"><button class="blue small ml20 mr20">注册</button></a>
-    </div>
-    </div>
-    <!-- munu end -->
-
-    <!-- 登录注册按钮 -->
-    <div class="btns">
-       <a href="{% url 'crowdfund:login' %}"><button class="white small" >登录</button></a>
-        <a href="{% url 'crowdfund:register' %}"><button class="blue small ml20 mr20">注册</button></a>
-    </div>
-
-</div>
-     <!-- head end -->
+    <!-- head end -->
      
-     <div class="project">
-        <div class="project-img">						
+    <div class="project">
+        <div class="project-img">
             <i class="zc-green-ing"></i>
             <img src="{% static 'images/xa1.jpg' %}" alt="">
         </div>
         <h3>西安瑶兰城市民宿</h3>
-          <p class="num-of-person" style="margin-top: 30px;color:#ff6262;font-size: 18px;">&emsp;&emsp;&emsp;&emsp;支持人数：26</p>
-          <p class="f16 c999 money-collect-wrap clearfix" style="margin-top: 20px;">
+        <p class="num-of-person" style="margin-top: 30px;color:#ff6262;font-size: 18px;">&emsp;&emsp;&emsp;&emsp;支持人数：26</p>
+        <p class="f16 c999 money-collect-wrap clearfix" style="margin-top: 20px;">
             <span class="fl" style="font-size: 18px;">&emsp;&emsp;&emsp;&emsp;已筹</span>
-
             <span class="collect-money fl">&yen;11000</span>
-          </p>
-          <p class="p-target" id="projectMessage">
-                此项目必须在
-                <span class="f_red">
-                    2019年12月31日
-                </span>前得到
-                <span class="f_red">
-                    <i>￥</i>50000
-                </span>的支持才可成功！
-                剩余<span class="f_red"> 15<span>天!
         </p>
-         <form class='form-ydt' action="/ydt/" method="post" style="width:100px;margin-top:5px;margin-left:850px;">
-             <div class="form-group" style="color:blue;position: absolute;margin-top: -90px;">
-                 {{ ydt_form.inflow_funds}}
-             </div>
-             <input type="submit" class="aa-btn" value="支持！" style="background:#66B3FF;width:100px;height:30px;margin-left:40px;margin-top:-45px;">
-         </form>
-         {% csrf_token %}
-     </div>
+        <p class="p-target" id="projectMessage">
+            此项目必须在
+            <span class="f_red">
+                2019年12月31日
+            </span>前得到
+            <span class="f_red">
+                <i>￥</i>50000
+            </span>的支持才可成功！
+            剩余<span class="f_red"> 15<span>天!
+        </p>
+        <form class='form-ydt' action="/project_details/" method="post" style="width:100px;margin-top:5px;margin-left:850px;">
+            <div class="form-group" style="color:blue;position: absolute;margin-top: -90px;">
+                {{ ydt_form.inflow_funds}}
+            </div>
+            <input type="submit" class="aa-btn" value="支持！" style="background:#66B3FF;width:100px;height:30px;margin-left:40px;margin-top:-45px;">
+        </form>
+        {% csrf_token %}
+    </div>
 
     <div class="panel pd-l-m tl">
         <div class="xheader tab f_l2" style="width:100%;">
@@ -89,6 +87,7 @@
 
         <div class="pd-content" id="introduce_area" style="margin:20px;">
             <article>
+
                 <section id="sec1" sectitle="项目介绍">
                     <p style="text-align: center;">
                         <img src="{% static 'images/xmjs1.jpg' %}">
@@ -148,7 +147,6 @@
                         <br>
                     </p>                                                    
                 </section>
-                                                                    
                 <section id="sec4" sectitle="风控措施">
                     <p style="text-align: center;">
                         <img src="{% static 'images/fk1.jpg' %}">
@@ -161,8 +159,8 @@
                     </p>                                                    
                 </section>
                                         
-                </article>
-            </div>
+            </article>
+        </div>
     </div>
 
     <div class="pd-r-m">
@@ -188,6 +186,5 @@
             </li>
         </ul>
     </div>
-
-    </div><!-- container end -->
+</div><!-- container end -->
 {% endblock %}

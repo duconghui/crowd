@@ -1,8 +1,9 @@
+
 {% load static %}
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/searchcss.css' %}">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <title>choose</title>
+    <title>choose</title>
 {% endblock %}
 {% block content %}
 <div class="container">
@@ -16,7 +17,7 @@
         </div>
         <div class="menu">
             <span><a href="{% url 'crowdfund:thefirst' %}">首页</a></span>
-            <span><a href="{% url 'crowdfund:search' %}">优质项目</a></span>
+            <span><a href="{% url 'crowdfund:filter' %}">优质项目</a></span>
             <span><a href="{% url 'crowdfund:add' %}">发起众筹</a></span>
             <span><a href="{% url 'crowdfund:guide' %}">新手指南</a></span>
             <span><a href="{% url 'crowdfund:myself' %}">个人中心</a></span>
@@ -38,6 +39,7 @@
         <span class="crumbs-level" id="crumbsLevel"><a href="#">优质项目</a> -&gt; 筛选</span>
     </div>
 </div>
+
 <div class="word" style="margin-top:40px;">
     <p>最新商品投资实时播报：</p>
     <marquee  behavior="scroll" direction="up" height="50" οnmοuseοver=this.stop() οnmοuseοut=this.start() scrollamount=3 style="margin-left:200px;margin-top: 0px;">
@@ -46,7 +48,9 @@
         <span style="color: #000000;">会员s***a投资了唱吧麦颂KTV北京百子湾店二期</span>
     </marquee>
 </div>
+
 <div class="container marketing">
+
     <!-- Three columns of text below the carousel -->
     <div class="row">
         <div class="col-lg-3">
@@ -72,6 +76,7 @@
     </div><!-- /.row -->
     <hr/>
 </div><!-- /.container -->
+
 <div class="footer">
     <div class="c11">
         </br>

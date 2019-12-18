@@ -49,7 +49,7 @@ class AddForm(forms.Form):
     summary = forms.CharField(max_length=40, widget=forms.Textarea(attrs={'class': 'form-control'}))
 
 
-class YdtForm(forms.Form):
+class PdForm(forms.Form):
     inflow_funds = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 

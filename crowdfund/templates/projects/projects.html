@@ -1,8 +1,8 @@
 
 {% load static %}
-{% block title %}myself{% endblock %}
+{% block title %}projects{% endblock %}
 {% block css %}
-    <link rel="stylesheet" href="{% static 'css/myselfcss.css' %}">
+    <link rel="stylesheet" href="{% static 'css/xiangmucss.css' %}">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 {% endblock %}
@@ -21,7 +21,7 @@
 
         <!-- menu -->
         <div class="menu">
-            <span><a href="{% url 'crowdfund:thefirst' %}">首页</a></span>
+            <span><a href="{% url 'crowdfund:thefirst' %}l">首页</a></span>
             <span><a href="{% url 'crowdfund:filter' %}">优质项目</a></span>
             <span><a href="{% url 'crowdfund:add' %}">发起众筹</a></span>
             <span><a href="{% url 'crowdfund:guide' %}">新手指南</a></span>
@@ -58,8 +58,8 @@
                 </div>
 
                 <ul class="nav nav-sidebar">
-                    <li class="active"><a href="{% url 'crowdfund:myself' %}"><span class="glyphicon glyphicon-dashboard"></span> 资料管理</a></li>
-                    <li><a href="{% url 'crowdfund:projects' %}"><span class="glyphicon glyphicon-th"></span> 项目管理</a></li>
+                    <li><a href="{% url 'crowdfund:myself' %}"><span class="glyphicon glyphicon-dashboard"></span> 资料管理</a></li>
+                    <li  class="active"><a href="{% url 'crowdfund:projects' %}"><span class="glyphicon glyphicon-th"></span> 项目管理</a></li>
                     <li><a href="{% url 'crowdfund:investment' %}"><span class="glyphicon glyphicon-stats"></span> 投资管理</a></li>
                     <li><a href="{% url 'crowdfund:xiaoxi' %}"><span class="glyphicon glyphicon-list-alt"></span> 消息中心</a></li>
                     <li><a href="{% url 'crowdfund:help' %}"><span class="glyphicon glyphicon-pencil"></span> 帮助中心</a></li>
@@ -68,70 +68,37 @@
                 </ul>
             </div><!--/.sidebar-->
 
-            <div class="fr w860 padding40" style="">
-                <!-- 上半部分开始 -->
-                <div class=" mb20">
-                    <!-- fl lay -->
-                    <div class="fl lay" style="width:480px;">
-                        <br>
-                        <p style="color:#66B3FF;font-size:14px;">
-                            {{ request.session.user_name }}
-                        </p>
-                        <div class="gray">
-                            <p>公司名称：众筹之家有限公司</p>
-                            <p>职位：主管</p>
-                            <p>地区：浙江</p>
-                        </div>
-                    </div>
-                    <!-- fl lay end -->
-
-                    <!--投资人认证审核 -->
-                    <div class="fr" style=" width:430px;height:200px; border-left:1px solid #ddd;margin-top:20px;">
-                        <div class="fl" style="width: 300px;margin-top:-100px;">
-                            <div class="mt30 text-center mb20"> <a href="{% url 'crowdfund:investor' %}" class="btn btn-blue btn-sm mt50">投资人资金管理</a>
-                                <hr/>
-                                <p class="mt15">认证状态：<span class="red">认证成功</span></p>
+            <div class="fr w860 padding40" style="height:800px;">
+                <div class="m-right fr">
+                    <div class="panel" style="width: 100%;">
+                        <div class="q1">
+                            <div class="m-orders-list-t mt20">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>项目名称</th>
+                                        <th>项目计划融资金额</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in all_item %}
+                                    <tr>
+                                        <td>{{ item.title }}</td>
+                                        <td>{{ item.amount }}</td>
+                                        <td>
+                                            <a class="btn btn-danger" href="{% url 'crowdfund:project_details2' %}">查看</a>
+                                            <a class="btn btn-info" href="{% url 'crowdfund:add' %}">增加</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                    <!--投资人认证审核 end-->
                 </div>
-                <!-- 上半部分 end-->
-
-                <!-- 下半部分开始 -->
-                <!-- 个人介绍 -->
-                <div class="fx-type bbottom lay">个人介绍
-                    <div class="editlay">
-                        <a href="javascript:;" class="blue edit-bio"><img src="{% static 'images/122.png' %}"></a>
-                    </div>
-                </div>
-                <!-- 个人介绍 end -->
-
-                <!-- 工作经历 -->
-                <div class="fx-type bbottom lay" style="margin-top: 80px;">工作经历
-                    <div class="editlay">
-                        <a href="javascript:;" class="blue add-job"><img src="{% static 'images/122.png' %}"></a>
-                    </div>
-                </div>
-                <!-- 工作经历 end -->
-
-                <!-- 教育经历 -->
-                <div class="fx-type bbottom lay" style="margin-top: 80px;">教育经历
-                    <div class="editlay">
-                        <a href="javascript:;" class="add-edu"><img src="{% static 'images/122.png' %}"></a>
-                    </div>
-                </div>
-
-                <!-- 投资案例 -->
-                <div class="fx-type bbottom lay" style="margin-top: 80px;">投资案例
-                    <div class="editlay">
-                        <a href="javascript:;" class="blue edit-invest-cases"><img src="{% static 'images/122.png' %}"></a>
-                    </div>
-                </div>
-                </br>
             </div>
-            <!-- 投资案例 end -->
-
             </p>
             </p>
         </div>
@@ -140,6 +107,7 @@
     <!-- footer -->
     </br>
     <div class="footer">
+
         <div class="c12">
 
             </br>
@@ -179,6 +147,7 @@
                 <h6><a href="#">在线反馈</a></h6>
                 <h6><a href="#">周一至周五(9:00-18:00)</a></h6>
             </div>
+
         </div>
 
         <div class="world" style="text-align: center;color: #6e6e6e;">
@@ -195,7 +164,6 @@
             <a href="#">免责声明</a><span class="sep">|</span>
             <a href="#">隐私权声明</a>
         </div>
-
     </div>
 </div>
 <!-- container end -->

@@ -7,10 +7,11 @@ from tkinter import Entry
 
 # Create your views here.
 from crowdfund import models
-from .forms import RegisterForm, LoginForm, AddForm, YdtForm, InvestorForm
+from .forms import RegisterForm, LoginForm, AddForm, PdForm, InvestorForm
 import hashlib
 
 
+# 页面显示
 def index(request):
     pass
     return render(request, 'index.html')
@@ -26,19 +27,19 @@ def myself(request):
     return render(request, 'myself/myself.html')
 
 
-def ydt(request):
+def project_details(request):
     pass
-    return render(request, 'ydt/ydt.html')
+    return render(request, 'project_details/project_details.html')
 
 
-def touzi(request):
+def investment(request):
     pass
-    return render(request, 'touzi/touzi.html')
+    return render(request, 'investment/investment.html')
 
 
-def xiangmu(request):
+def projects(request):
     pass
-    return render(request, 'xiangmu/xiangmu.html')
+    return render(request, 'projects/projects.html')
 
 
 def login(request):
@@ -51,9 +52,9 @@ def guide(request):
     return render(request, 'guide/guide.html')
 
 
-def search(request):
+def filter(request):
     pass
-    return render(request, 'search/search.html')
+    return render(request, 'filter/filter.html')
 
 
 def investor(request):
@@ -63,7 +64,12 @@ def investor(request):
 
 def choose(request):
     pass
-    return render(request, 'search/choose.html')
+    return render(request, 'filter/choose.html')
+
+
+def add(request):
+    pass
+    return render(request, 'add/add.html')
 
 
 # 注册函数
@@ -133,12 +139,6 @@ def hash_code(s, salt='mysite'):
     return h.hexdigest()
 
 
-# 显示发布项目页面
-def add(request):
-    pass
-    return render(request, 'add/add.html')
-
-
 # 提交发布项目信息
 def add(request):
     if request.method == 'POST':
@@ -178,24 +178,25 @@ def add(request):
 
 # 用户投资
 @csrf_exempt
-def ydt(request):
+def project_details(request):
     if request.method == "POST":
-        ydt_form = YdtForm(request.POST)
-        if ydt_form.is_valid():
-            inflow_funds = ydt_form.cleaned_data['inflow_funds']
+        pd_form = PdForm(request.POST)
+        if pd_form.is_valid():
+            inflow_funds = pd_form.cleaned_data['inflow_funds']
             # 业务表添加
             new_item = models.Business.objects.create()
             new_item.inflow_funds = inflow_funds
             new_item.save()
-            return render(request, 'ydt/ydt.html', locals())
-    ydt_form = YdtForm()
-    return render(request, 'ydt/ydt.html', locals())
+            return render(request, 'project_details/project_details.html', locals())
+    pd_form = PdForm()
+    return render(request, 'project_details/project_details.html', locals())
 
 
 # 项目展示
-def xiangmu(request):
+def projects(request):
     all_item = Item.objects.all()
-    return render(request, 'xiangmu/xiangmu.html', {'all_item': all_item})
+    return render(request, 'projects/projects.html', {'all_item': all_item})
+
 
 # 搜索
 # def search_top(request):
@@ -222,7 +223,9 @@ def myself_img(request):
         return JsonResponse(data)
 
     return render(request, 'myself/myself.html')
-def xiangmu_img(request):
+
+
+def projects_img(request):
     if request.method == 'POST':
         avatar = request.FILES.get('avatar')
 
@@ -234,8 +237,10 @@ def xiangmu_img(request):
 
         return JsonResponse(data)
 
-    return render(request, 'xiangmu/xiangmu.html')
-def touzi_img(request):
+    return render(request, 'projects/projects.html')
+
+
+def investment_img(request):
     if request.method == 'POST':
         avatar = request.FILES.get('avatar')
 
@@ -247,7 +252,7 @@ def touzi_img(request):
 
         return JsonResponse(data)
 
-    return render(request, 'touzi/touzi.html')
+    return render(request, 'investment/investment.html')
 
 
 # 用户投资账户管理
@@ -273,10 +278,24 @@ def investor(request):
 
 
 # 用户金额显示
-def touzi_show(request):
+def investment_show(request):
     all_investor = Investor.objects.all()
-    return render(request, 'touzi/touzi.html', {'all_investor': all_investor})
+    return render(request, 'investment/investment.html', {'all_investor': all_investor})
 
 
 # 项目进展显示
 # def ydt_show(request):
+
+# 用户投资
+def project_details2(request):
+    if request.method == "POST":
+        pd_form = PdForm(request.POST)
+        if pd_form.is_valid():
+            inflow_funds = pd_form.cleaned_data['inflow_funds']
+            # 业务表添加
+            new_item = models.Business.objects.create()
+            new_item.inflow_funds = inflow_funds
+            new_item.save()
+            return render(request, 'project_details2/project_details2.html', locals())
+    pd_form = PdForm()
+    return render(request, 'project_details2/project_details2.html', locals())

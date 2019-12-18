@@ -1,8 +1,8 @@
 
 {% load static %}
-{% block title %}myself{% endblock %}
+{% block title %}investment{% endblock %}
 {% block css %}
-    <link rel="stylesheet" href="{% static 'css/myselfcss.css' %}">
+    <link rel="stylesheet" href="{% static 'css/touzicss.css' %}">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 {% endblock %}
@@ -35,10 +35,11 @@
             </span>
 
             <!-- 登录注册按钮 -->
-            <div class="btns" style="margin-left: 800px;margin-top:-40px;">
+            <div class="btns" style="margin-left: 800px;margin-top:-20px;">
                 <a href="{% url 'crowdfund:login' %}"><button class="white small" style="">登录</button></a>
                 <a href="{% url 'crowdfund:register' %}"><button class="blue small ml20 mr20">注册</button></a>
             </div>
+
         </div>
         <!-- munu end -->
     </div>
@@ -58,9 +59,9 @@
                 </div>
 
                 <ul class="nav nav-sidebar">
-                    <li class="active"><a href="{% url 'crowdfund:myself' %}"><span class="glyphicon glyphicon-dashboard"></span> 资料管理</a></li>
+                    <li><a href="{% url 'crowdfund:myself' %}"><span class="glyphicon glyphicon-dashboard"></span> 资料管理</a></li>
                     <li><a href="{% url 'crowdfund:projects' %}"><span class="glyphicon glyphicon-th"></span> 项目管理</a></li>
-                    <li><a href="{% url 'crowdfund:investment' %}"><span class="glyphicon glyphicon-stats"></span> 投资管理</a></li>
+                    <li class="active"><a href="{% url 'crowdfund:investment' %}"><span class="glyphicon glyphicon-stats"></span> 投资管理</a></li>
                     <li><a href="{% url 'crowdfund:xiaoxi' %}"><span class="glyphicon glyphicon-list-alt"></span> 消息中心</a></li>
                     <li><a href="{% url 'crowdfund:help' %}"><span class="glyphicon glyphicon-pencil"></span> 帮助中心</a></li>
                     <li role="presentation" class="divider"></li>
@@ -68,70 +69,30 @@
                 </ul>
             </div><!--/.sidebar-->
 
-            <div class="fr w860 padding40" style="">
-                <!-- 上半部分开始 -->
-                <div class=" mb20">
-                    <!-- fl lay -->
-                    <div class="fl lay" style="width:480px;">
-                        <br>
-                        <p style="color:#66B3FF;font-size:14px;">
-                            {{ request.session.user_name }}
-                        </p>
-                        <div class="gray">
-                            <p>公司名称：众筹之家有限公司</p>
-                            <p>职位：主管</p>
-                            <p>地区：浙江</p>
-                        </div>
-                    </div>
-                    <!-- fl lay end -->
-
-                    <!--投资人认证审核 -->
-                    <div class="fr" style=" width:430px;height:200px; border-left:1px solid #ddd;margin-top:20px;">
-                        <div class="fl" style="width: 300px;margin-top:-100px;">
-                            <div class="mt30 text-center mb20"> <a href="{% url 'crowdfund:investor' %}" class="btn btn-blue btn-sm mt50">投资人资金管理</a>
-                                <hr/>
-                                <p class="mt15">认证状态：<span class="red">认证成功</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--投资人认证审核 end-->
+            <div class="fr w860 padding40" style="height:800px;">
+                <div class="panel" style="width: 100%;">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>支出</th>
+                            <th>收入</th>
+                            <th>余额</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for investor in all_investor %}
+                        <tr>
+                            <td>{{ investor.expenditure }}</td>
+                            <td>{{ investor.recharge }}</td>
+                            <td>{{ investor.disposable_funds }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
-                <!-- 上半部分 end-->
-
-                <!-- 下半部分开始 -->
-                <!-- 个人介绍 -->
-                <div class="fx-type bbottom lay">个人介绍
-                    <div class="editlay">
-                        <a href="javascript:;" class="blue edit-bio"><img src="{% static 'images/122.png' %}"></a>
-                    </div>
-                </div>
-                <!-- 个人介绍 end -->
-
-                <!-- 工作经历 -->
-                <div class="fx-type bbottom lay" style="margin-top: 80px;">工作经历
-                    <div class="editlay">
-                        <a href="javascript:;" class="blue add-job"><img src="{% static 'images/122.png' %}"></a>
-                    </div>
-                </div>
-                <!-- 工作经历 end -->
-
-                <!-- 教育经历 -->
-                <div class="fx-type bbottom lay" style="margin-top: 80px;">教育经历
-                    <div class="editlay">
-                        <a href="javascript:;" class="add-edu"><img src="{% static 'images/122.png' %}"></a>
-                    </div>
-                </div>
-
-                <!-- 投资案例 -->
-                <div class="fx-type bbottom lay" style="margin-top: 80px;">投资案例
-                    <div class="editlay">
-                        <a href="javascript:;" class="blue edit-invest-cases"><img src="{% static 'images/122.png' %}"></a>
-                    </div>
-                </div>
-                </br>
             </div>
-            <!-- 投资案例 end -->
 
+            <!-- 投资案例 end -->
             </p>
             </p>
         </div>
@@ -202,17 +163,17 @@
 {% endblock %}
 
 <script>
-    // 上传文件按钮（label里的图片）点击事件
-    $('#avatar-input').on('change',function () {
-        // 获取用户最后一次选择的图片
-        var choose_file=$(this)[0].files[0];
-        // 创建一个新的FileReader对象，用来读取文件信息
-        var reader=new FileReader();
-        // 读取用户上传的图片的路径
-        reader.readAsDataURL(choose_file);
-        // 读取完毕之后，将图片的src属性修改成用户上传的图片的本地路径
-        reader.onload=function () {
-             $("#avatar-img").attr("src",reader.result)
-        }
-    });
+// 上传文件按钮（label里的图片）点击事件
+$('#avatar-input').on('change',function () {
+    // 获取用户最后一次选择的图片
+    var choose_file=$(this)[0].files[0];
+    // 创建一个新的FileReader对象，用来读取文件信息
+    var reader=new FileReader();
+    // 读取用户上传的图片的路径
+    reader.readAsDataURL(choose_file);
+    // 读取完毕之后，将图片的src属性修改成用户上传的图片的本地路径
+    reader.onload=function () {
+        $("#avatar-img").attr("src",reader.result)
+    }
+});
 </script>

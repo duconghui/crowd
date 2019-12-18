@@ -1,9 +1,10 @@
+
 {% load static %}
 <script type="text/javascript" src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/searchcss.css' %}">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <title>search</title>
+    <title>search</title>
 {% endblock %}
 {% block content %}
 <div class="container">
@@ -17,7 +18,7 @@
         </div>
         <div class="menu">
             <span><a href="{% url 'crowdfund:thefirst' %}">首页</a></span>
-            <span><a href="{% url 'crowdfund:search' %}">优质项目</a></span>
+            <span><a href="{% url 'crowdfund:filter' %}">优质项目</a></span>
             <span><a href="{% url 'crowdfund:add' %}">发起众筹</a></span>
             <span><a href="{% url 'crowdfund:guide' %}">新手指南</a></span>
             <span><a href="{% url 'crowdfund:myself' %}">个人中心</a></span>
@@ -101,6 +102,7 @@
         </ul>
     </div>
 </div>
+
 <!-- 文字轮播 -->
 <div class="word">
     <p>最新商品投资实时播报：</p>
@@ -110,7 +112,9 @@
         <span style="color: #000000;">会员s***a投资了唱吧麦颂KTV北京百子湾店二期</span>
     </marquee>
 </div>
+
 <div class="container marketing">
+
     <!-- Three columns of text below the carousel -->
     <div class="row">
         <div class="col-lg-3">
@@ -156,6 +160,7 @@
     </div><!-- /.row -->
     <hr/>
 </div><!-- /.container -->
+
 <div class="footer">
     <div class="c11">
         </br>
@@ -206,54 +211,57 @@
     </div>
 </div>
 {% endblock %}
+
 <script type="text/javascript">
  	 /*筛选列表内容区*/
  	$(".product-list-more i").click(function(){
- 	var exp = this.innerHTML == '更多';
- 	this.innerHTML = exp?'收起':'更多';
- 	$(this).parent().parent().find(".fl").height(exp ? 'auto' : '38px');
- 	var setheight = $(this).parent().parent().children(".fl").innerHeight();
- 	$(this).parent().parent().find("dt").height(setheight);
- 	if (this.innerHTML == '更多') {
- 	$(this).parent().find("img").css("transform","rotate(0deg)")
- 	}else{
- 	$(this).parent().find("img").css("transform","rotate(180deg)")
- 	}
+ 	    var exp = this.innerHTML == '更多';
+ 	    this.innerHTML = exp?'收起':'更多';
+ 	    $(this).parent().parent().find(".fl").height(exp ? 'auto' : '38px');
+ 	    var setheight = $(this).parent().parent().children(".fl").innerHeight();
+ 	    $(this).parent().parent().find("dt").height(setheight);
+ 	    if (this.innerHTML == '更多') {
+ 	        $(this).parent().find("img").css("transform","rotate(0deg)")
+ 	    }
+        else {
+ 	        $(this).parent().find("img").css("transform","rotate(180deg)")
+ 	    }
  	})
  	 
  	function removeChose(obj, index) { //删除筛选
- 	var _index = index++;
- 	$("#ul_select").children(".select-list").eq(index).find(".selected").removeClass("selected");//删除商品选中样式
- 	$("#ul_select").children(".select-list").eq(index).find("dl").text();
- 	$("#ul_select").children("li").eq(_index).show();
- 	obj.remove();//当前按钮删除
- 	getResult();
+ 	    var _index = index++;
+ 	    $("#ul_select").children(".select-list").eq(index).find(".selected").removeClass("selected");//删除商品选中样式
+ 	    $("#ul_select").children(".select-list").eq(index).find("dl").text();
+ 	    $("#ul_select").children("li").eq(_index).show();
+ 	    obj.remove();//当前按钮删除
+ 	    getResult();
  	}
  	/*筛选全部删除*/
  	$("#clearAll").click(function () {
- 	$(this).parent().parent().find("dd").remove()
- 	$("#ul_select").children(".select-list").show();
+ 	    $(this).parent().parent().find("dd").remove()
+ 	    $("#ul_select").children(".select-list").show();
  	})
  	$(function() {
- 	$("#ul_select").find(".dl").find("div").children("dd").click(function() { //每个分类行绑定点击事件
- 	$(this).addClass("selected").siblings("dd").removeClass("selected"); //当前元素选中，其余删除选中样式
- 	var index = $(this).parents(".select-list").index();//获取父级索引index
- 	var propertyName = $(this).parent().parent().children("dt").text();//获取当前选项的属性
- 	$(this).parent().parent().parent().hide();
- 	var goods = $(this).children("span").text();//获取当前选项名称
- 	$("#select_" + index).remove();//删除当前索引的筛选
- 	if (goods != '全部') { //若不是全部 在筛选区域添加选项
- 	$("#dl_result").append("<dd id='select_" + index + "' class='selected' οnclick=removeChose($(this),'" + index + "')><span><i>"+propertyName+"</i><i>" + goods + "</i><i>x</i></span></dd>");
- 	}
- 	getResult();
- 	})
+ 	    $("#ul_select").find(".dl").find("div").children("dd").click(function() { //每个分类行绑定点击事件
+ 	        $(this).addClass("selected").siblings("dd").removeClass("selected"); //当前元素选中，其余删除选中样式
+ 	        var index = $(this).parents(".select-list").index();//获取父级索引index
+ 	        var propertyName = $(this).parent().parent().children("dt").text();//获取当前选项的属性
+ 	        $(this).parent().parent().parent().hide();
+ 	        var goods = $(this).children("span").text();//获取当前选项名称
+ 	        $("#select_" + index).remove();//删除当前索引的筛选
+ 	        if (goods != '全部') { //若不是全部 在筛选区域添加选项
+ 	            $("#dl_result").append("<dd id='select_" + index + "' class='selected' οnclick=removeChose($(this),'" + index + "')><span><i>"+propertyName+"</i><i>" + goods + "</i><i>x</i></span></dd>");
+ 	        }
+ 	        getResult();
+ 	    })
  	});
  	function getResult() { //结果处理
- 	var len_chose = $("#dl_result").children(".selected").length;
- 	if (len_chose > 0) { //若是筛选区域选中项大于0
- 	$(".select-no").hide();//暂时没有选择过滤条件 隐藏
- 	} else {
- 	$(".select-no").show();//暂时没有选择过滤条件 显示
- 	}
+ 	    var len_chose = $("#dl_result").children(".selected").length;
+ 	    if (len_chose > 0) { //若是筛选区域选中项大于0
+ 	        $(".select-no").hide();//暂时没有选择过滤条件 隐藏
+ 	    }
+        else {
+ 	        $(".select-no").show();//暂时没有选择过滤条件 显示
+ 	    }
  	}
 </script>

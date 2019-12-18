@@ -26,15 +26,16 @@ urlpatterns = [
     url(r'^myself/', views.myself, name='myself'),
     url(r'^thefirst/', views.thefirst, name='thefirst'),
     url(r'^add/', views.add, name='add'),
-    url(r'^touzi/', views.touzi, name='touzi'),
+    url(r'^investment/', views.investment, name='investment'),
     url(r'^investor/', views.investor, name='investor'),
     url(r'^choose', views.choose, name='choose'),
-    url(r'^xiangmu', views.xiangmu, name='xiangmu'),
-    url(r'^ydt', views.ydt, name='ydt'),
+    url(r'^projects', views.projects, name='projects'),
+    url(r'^project_details', views.project_details, name='project_details'),
     url(r'^guide', views.guide, name='guide'),
-    url(r'^search', views.search, name='search'),
-    url(r'^xiaoxi', views.thefirst, name='xiaoxi'),
+    url(r'^filter', views.filter, name='filter'),
+    url(r'^xiaoxi', views.filter, name='xiaoxi'),
     url(r'^help', views.guide, name='help'),
+    url(r'^project_details2', views.project_details2, name='project_details2'),
 ]
 
 app_name = 'crowdfund'
